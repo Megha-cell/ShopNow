@@ -12,10 +12,11 @@ import userRoutes from "./routes/userRoutes.js";
 dotenv.config(); //Load environment variables
 
 const app = express();
-app.use(express.json()); //Middleware to parse JSON requests
 app.use(cors({ origin: process.env.frontend_url1 }));
 //Enable Cross-Origin Resource Sharing(CORS)
 app.use(cors({ origin: process.env.frontend_url }));
+
+app.use(express.json()); //Middleware to parse JSON requests
 
 app.use("/api/auth", authRoutes);
 app.use("/api/products", productRoutes);
