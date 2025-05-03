@@ -1,0 +1,12 @@
+# dependencies
+/node_modules
+
+# build output
+/build
+/dist
+
+# dotenv environment variables
+.env
+
+# system files
+.DS_Store
