@@ -43,12 +43,6 @@ app.options("*", cors());
 
 // Middleware to parse JSON requests
 app.use(express.json());
-app.get("/", (req, res) => res.send("API is running..."));
-// Serve React app for all other routes
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "dist", "index.html"));
-});
-
 // Serve static files from the dist folder
 app.use(express.static(path.join(__dirname, "dist")));
 
@@ -59,6 +53,11 @@ app.use("/api/orders", orderRoutes);
 app.use("/api/cart", cartRoutes);
 app.use("/api/categories", categoryRoutes);
 app.use("/api/users", userRoutes);
+app.get("/", (req, res) => res.send("API is running..."));
+// Serve React app for all other routes
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "dist", "index.html"));
+});
 
 // Connect to MongoDB
 mongoose
