@@ -2,8 +2,8 @@ import express from "express";
 import dotenv from "dotenv";
 import cors from "cors";
 import mongoose from "mongoose";
-import path from "path";
-import { fileURLToPath } from "url"; // for ES module support
+// import path from "path";
+// import { fileURLToPath } from "url"; // for ES module support
 import authRoutes from "./routes/auth.js";
 import productRoutes from "./routes/productRoutes.js";
 import orderRoutes from "./routes/orderRoutes.js";
@@ -15,9 +15,9 @@ dotenv.config(); // Load environment variables
 
 const app = express();
 
-// Get the __dirname for ES module support
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+// // Get the __dirname for ES module support
+// const __filename = fileURLToPath(import.meta.url);
+// const __dirname = path.dirname(__filename);
 
 // Allowed origins for CORS
 const allowedOrigins = [
@@ -44,13 +44,13 @@ app.options("*", cors());
 // Middleware to parse JSON requests
 app.use(express.json());
 // Test route for API check
-app.get("/", (req, res) => res.send("API is running..."));
-// Serve static files from the dist folder
-app.use(express.static(path.join(__dirname, "dist")));
-// Serve React app for all other routes
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "dist", "index.html"));
-});
+// app.get("/", (req, res) => res.send("API is running..."));
+// // Serve static files from the dist folder
+// app.use(express.static(path.join(__dirname, "dist")));
+// // Serve React app for all other routes
+// app.get("*", (req, res) => {
+//   res.sendFile(path.join(__dirname, "dist", "index.html"));
+// });
 // API routes
 app.use("/api/auth", authRoutes);
 app.use("/api/products", productRoutes);

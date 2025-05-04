@@ -4,7 +4,7 @@
 # build output
 /build
 
-
+dist
 # dotenv environment variables
 .env
 
