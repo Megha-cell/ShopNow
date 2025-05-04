@@ -3,7 +3,7 @@
 
 # build output
 /build
-/dist
+dist
 
 # dotenv environment variables
 .env
