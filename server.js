@@ -43,9 +43,14 @@ app.options("*", cors());
 
 // Middleware to parse JSON requests
 app.use(express.json());
+// Test route for API check
+app.get("/", (req, res) => res.send("API is running..."));
 // Serve static files from the dist folder
 app.use(express.static(path.join(__dirname, "dist")));
-
+// Serve React app for all other routes
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "dist", "index.html"));
+});
 // API routes
 app.use("/api/auth", authRoutes);
 app.use("/api/products", productRoutes);
@@ -53,18 +58,12 @@ app.use("/api/orders", orderRoutes);
 app.use("/api/cart", cartRoutes);
 app.use("/api/categories", categoryRoutes);
 app.use("/api/users", userRoutes);
-app.get("/", (req, res) => res.send("API is running..."));
-// Serve React app for all other routes
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "dist", "index.html"));
-});
 
 // Connect to MongoDB
 mongoose
   .connect(process.env.MONGO_URI)
   .then(() => console.log("MongoDB connected"))
   .catch((err) => console.log("MongoDB Connection Error:", err));
-// Test route for API check
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
